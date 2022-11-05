@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
 
 
@@ -16,6 +17,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
     <style>
         body {
@@ -32,16 +38,44 @@
 </head>
 
 <body>
-    <nav class="navbar ml-2">
-        <span class="navbar-brand mb-0 h1" style="color: white">
-            <span style="font-size: 2rem;margin-left:100px;">CertChain</span>
-            <span>Blockchain based certificate record</span>
 
-        </span>
+
+
+    <nav class="navbar navbar-expand-lg  ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" style="color: white;font-size: 2rem;margin-left:100px;">CertChain</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="/certification"
+                            {{ session()->get('status') == 'admin' ? 'hidden' : '' }}>Holder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="/certification/sign"
+                            {{ session()->get('status') == 'admin' ? 'hidden' : '' }}>Sign</a>
+                    </li>
+
+                    <li class="nav-item" {{ session()->get('status') != 'admin' ? 'hidden' : '' }}>
+                        <a class="nav-link" style="color: white" href="/user">Users</a>
+                    </li>
+
+                    <li class="nav-item"
+                        {{ session()->get('status') == 'admin' || session()->get('status') == 'creator' ? '' : 'hidden' }}>
+                        <a class="nav-link" style="color: white" href="/certification">Certification</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
     </nav>
     <hr style="height:10px;">
 
-    <h3 style="margin-left: 100px;color:white;">Welcome,Admin</h3>
+    <h3 style="margin-left: 100px;color:white;">Welcome,{{ $nama }}</h3>
     <div class="container">
         @yield('content')
 

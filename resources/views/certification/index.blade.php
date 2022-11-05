@@ -1,6 +1,24 @@
 @extends('template.template')
 @section('content')
     <div class="row mt-5">
+        <div class="text-center">
+
+            @if (session()->has('failed'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ session('failed') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @elseif (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session('success') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        </div>
         <div class="col">
 
             <a class="btn btn-primary mb-4" href="{{ url('/certification/add') }}">New Data</a>
@@ -20,19 +38,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td>hash 123</td>
-                        <td>cindy</td>
-                        <td>2022/12/12</td>
-                        <td>gama</td>
-                        <td>ijazah</td>
-                        <td>contoh data</td>
-                        <td>contoh data</td>
-                        <td>https://test</td>
-                        <td>
-                            <p class="btn btn-primary" id="detail">Detail</p>
-                        </td>
+                    @foreach ($data as $d )
+                    <tr>
+                        <td>{{$d->hash_certificate}}</td>
+                        <td>{{$d->holder_name}}</td>
+                        <td>{{$d->sign_name}}</td>
+                        <td>-</td>
+                        <td>{{$d->title_certificate}}</td>
+                        <td>{{$d->data_certificate}}</td>
+                        <td>{{$d->data_certificate1}}</td>
+                        <td>{{$d->ipfs_link}}</td>
+                        <td><a href="/certification/detail/{{$d->id_certificate}}" class="btn btn-primary">Detail</a></td>
+
+
                     </tr>
+                        
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -72,30 +93,30 @@
                             <label for="">Certification Title</label>
                             <input type="text" class="form-control" readonly>
                         </div>
-                        
+
                     </div>
                     <div class="row my-3">
                         <div class="col">
                             <label for="">Certification Data 1</label>
                             <input type="text" class="form-control" readonly>
                         </div>
-                        
+
                     </div>
                     <div class="row my-3">
                         <div class="col">
                             <label for="">Certification Data 2</label>
                             <input type="text" class="form-control" readonly>
                         </div>
-                        
+
                     </div>
                     <div class="row my-3">
                         <div class="col">
                             <label for="">IPFS Link</label>
                             <input type="text" class="form-control" readonly>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

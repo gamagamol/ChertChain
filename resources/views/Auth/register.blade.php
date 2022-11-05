@@ -39,7 +39,7 @@
     <div class="container" >
         <div class="row justify-content-center">
             <div class="col-md-6 ">
-                <div class="card o-hidden border-0 shadow-lg my-5 mt-5 " style="height:500px;background-color:#D9D9D9;">
+                <div class="card o-hidden border-0 shadow-lg my-5 mt-5 " style="height:550px;background-color:#D9D9D9;">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -57,7 +57,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <form class="user" method="POST" action="login">
+                                    <form class="user" method="POST" action="{{url("/register")}}">
                                         @csrf
                                         <div class="form-group">
                                             <label for="athereum">Athereum Address</label>
@@ -66,6 +66,18 @@
                                                 placeholder="Enter athereum" name="athereum"
                                                >
                                             @error('athereum')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Full Name</label>
+                                            <input type="text"
+                                                class="form-control form-control-user @error('name') is-invalid @enderror my-2"
+                                                placeholder="Enter name" name="name"
+                                               >
+                                            @error('name')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -86,7 +98,7 @@
 
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="text"
+                                            <input type="password"
                                                 class="form-control form-control-user @error('password') is-invalid @enderror my-2"
                                                 placeholder="Enter password" name="password"
                                                >
@@ -99,7 +111,7 @@
 
                                         <div class="form-group">
                                             <label for="password2"> Repeat Password</label>
-                                            <input type="text"
+                                            <input type="password"
                                                 class="form-control form-control-user @error('password2') is-invalid @enderror my-2"
                                                 placeholder="Enter password2" name="password2"
                                                >
