@@ -38,21 +38,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $d )
-                    <tr>
-                        <td>{{$d->hash_certificate}}</td>
-                        <td>{{$d->holder_name}}</td>
-                        <td>{{$d->sign_name}}</td>
-                        <td>-</td>
-                        <td>{{$d->title_certificate}}</td>
-                        <td>{{$d->data_certificate}}</td>
-                        <td>{{$d->data_certificate1}}</td>
-                        <td>{{$d->ipfs_link}}</td>
-                        <td><a href="/certification/detail/{{$d->id_certificate}}" class="btn btn-primary">Detail</a></td>
+                    @foreach ($data as $d)
+                        <tr>
+                            <td>{{ $d->hash_certificate }}</td>
+                            <td>{{ $d->holder_name }}</td>
+                            <td>{{ $d->sign_name }}</td>
+                            <td>{{ $d->date_sign_sign ? $d->date_sign_sign : 'Not Signed' }}</td>
+
+                            <td>{{ $d->title_certificate }}</td>
+                            <td>{{ $d->data_certificate }}</td>
+                            <td>{{ $d->data_certificate1 }}</td>
+                            <td>{{ $d->ipfs_link }}</td>
+                            <td><a href="/certification/detail/{{ $d->id_certificate }}" class="btn btn-primary">Detail</a>
+                            </td>
 
 
-                    </tr>
-                        
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

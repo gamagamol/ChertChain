@@ -34,7 +34,14 @@ Route::get('/certification',[CertificationController::class,'index']);
 Route::get('/certification/add',[CertificationController::class,'create']);
 Route::post('/certification/store',[CertificationController::class, 'store']);
 Route::get('/certification/detail/{id}',[CertificationController::class,'show']);
+Route::get('/certification/sign_detail/{id}',[CertificationController::class, 'SignDetail']);
+
+Route::post('/certification/update_sign',[CertificationController::class, 'UpdateSign']);
+
 Route::get('/certification/sign',[CertificationController::class,'sign']);
+Route::get('/certification/holder',[CertificationController::class,'holder']);
+Route::get('/certification/holder_detail/{id}',[CertificationController::class, 'HolderDetail']);
 
 
+Route::post('/certification/update_all', [CertificationController::class, 'UpdateAll']);
 

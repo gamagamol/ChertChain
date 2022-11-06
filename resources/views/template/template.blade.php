@@ -52,7 +52,7 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="/certification"
+                        <a class="nav-link" style="color: white" href="/certification/holder"
                             {{ session()->get('status') == 'admin' ? 'hidden' : '' }}>Holder</a>
                     </li>
                     <li class="nav-item">

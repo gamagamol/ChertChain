@@ -1,6 +1,6 @@
 @extends('template.template')
 @section('content')
-    {{-- @dump($data) --}}
+    @dump($data)
     <div class="row justify-content-center">
         <div class="col-md-6 ">
             <div class="card o-hidden border-0 shadow-lg my-5 mt-5 " style="height:750px;background-color:#D9D9D9;">

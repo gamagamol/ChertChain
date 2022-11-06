@@ -60,8 +60,33 @@ class CertificationController extends Controller
     }
     public function sign()
     {
-        return view('certification.sign');
+        $nama = $this->user->GetUser(session()->get('ussername'));
+
+        $id_auth = $this->user->GetUser(session()->get('ussername'));
+
+        $data = [
+            'nama' => $nama[0]->name,
+            'id_auth' => $id_auth[0]->id_auth,
+            'data' => $this->certificate->Sign($id_auth[0]->id_auth)
+        ];
+        return view('certification.sign', $data);
     }
+
+
+    public function holder()
+    {
+        $nama = $this->user->GetUser(session()->get('ussername'));
+
+        $id_auth = $this->user->GetUser(session()->get('ussername'));
+
+        $data = [
+            'nama' => $nama[0]->name,
+            'id_auth' => $id_auth[0]->id_auth,
+            'data' => $this->certificate->Holder($id_auth[0]->id_auth)
+        ];
+        return view('certification.holder', $data);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -132,43 +157,50 @@ class CertificationController extends Controller
             'data' => $this->certificate->GetCertificateById($id)
         ];
 
-        
 
 
-        return view('certification.detail',$data);
+
+        return view('certification.detail', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+
+    public function SignDetail($id)
     {
-        //
+
+        $nama = $this->user->GetUser(session()->get('ussername'));
+        $data = [
+            'nama' => $nama[0]->name,
+            'data' => $this->certificate->GetCertificateById($id)
+        ];
+        return view('certification.sign_detail', $data);
+    }
+    public function HolderDetail($id)
+    {
+
+        $nama = $this->user->GetUser(session()->get('ussername'));
+        $data = [
+            'nama' => $nama[0]->name,
+            'data' => $this->certificate->GetCertificateById($id)
+        ];
+        return view('certification.holder_detail', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function UpdateSign(Request $r)
     {
-        //
+
+
+        $this->certificate->UpdateSign($r->id_certificate, $r->type);
+
+
+        return redirect("/certification/$r->type")->with('success', "Succes Update Data");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function UpdateAll(Request $r)
     {
-        //
+        $this->certificate->UpdateAll($r->id_auth, $r->type);
+        return response()->json(['status'=>true]);
     }
 }

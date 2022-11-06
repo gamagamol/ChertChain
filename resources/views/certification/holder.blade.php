@@ -22,7 +22,6 @@
         </div>
         <div class="col">
 
-
             <table class="table table-bordered bg-light" id="table">
                 <thead>
                     <tr class="text-center">
@@ -44,12 +43,12 @@
                             <td>{{ $d->hash_certificate }}</td>
                             <td>{{ $d->holder_name }}</td>
                             <td>{{ $d->sign_name }}</td>
-                            <td>{{ $d->date_sign_sign ? $d->date_sign_sign : 'Not Signed' }}</td>
+                            <td>{{ $d->date_sign_holder ? $d->date_sign_holder : 'Not Signed' }}</td>
                             <td>{{ $d->title_certificate }}</td>
                             <td>{{ $d->data_certificate }}</td>
                             <td>{{ $d->data_certificate1 }}</td>
                             <td>{{ $d->ipfs_link }}</td>
-                            <td><a href="/certification/sign_detail/{{ $d->id_certificate }}"
+                            <td><a href="/certification/holder_detail/{{ $d->id_certificate }}"
                                     class="btn btn-primary">Detail</a>
                             </td>
                     @endforeach
@@ -99,7 +98,7 @@
             $('#checkall').click(function() {
 
 
-
+                
 
                 $.ajax({
                     headers: {
@@ -109,7 +108,7 @@
                     type: 'POST',
                     data: {
                         id_auth: {{ $id_auth }},
-                        type: 'sign'
+                        type: 'holder'
                     },
                     dataType: 'json',
                     success: function(data) {
